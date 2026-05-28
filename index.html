@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expense Tracker — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-surface text-on-surface font-body-md">
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>Expense Tracker</h1>
+      <p class="muted">Wealth Tracker</p>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-item active">Dashboard</a>
+      <a href="goal.html" class="nav-item">Goals</a>
+      <a href="spending.html" class="nav-item">Spending</a>
+      <a href="settings.html" class="nav-item">Settings</a>
+    </nav>
+    <button id="open-add" class="cta">Add Expense</button>
+  </aside>
+
+  <header class="topbar">
+    <h2>Dashboard</h2>
+    <div class="profile">
+      <button id="btn-search" class="icon">🔍</button>
+      <button id="btn-notif" class="icon">🔔</button>
+      <img src="https://via.placeholder.com/40" alt="avatar" class="avatar">
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero card vivid-gradient">
+      <div class="hero-inner">
+        <p class="muted">Total Balance</p>
+        <h1 id="total-balance">₹0.00</h1>
+        <div class="hero-stats">
+          <div class="stat">
+            <p class="muted tiny">Income</p>
+            <p id="total-income">₹0.00</p>
+          </div>
+          <div class="stat">
+            <p class="muted tiny">Expenses</p>
+            <p id="total-expenses">₹0.00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card salary-card">
+      <div class="salary-entry">
+        <div>
+          <h3>Salary Tracker</h3>
+          <p class="muted">Enter your latest salary amount and keep your balance accurate.</p>
+          <p class="salary-summary">Current salary: <strong id="salary-value">₹0.00</strong></p>
+        </div>
+        <div class="salary-form">
+          <input id="salary-input" type="number" min="0" placeholder="Enter salary amount" />
+          <button id="save-salary" class="btn primary">Save Salary</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Recent Transactions</h3>
+        <div id="transactions-list"></div>
+        <div class="actions-row">
+          <button id="clear-all" class="btn danger" onclick="clearAllData()">Delete All</button>
+          <button id="load-more" class="btn">Load More Transactions</button>
+        </div>
+      </div>
+
+      <aside class="card side">
+        <div class="goal-card">
+          <h4>Goal: Dream Vacation</h4>
+          <p class="big"><span id="goal-amount">₹1200</span> • Saved <strong id="goal-saved">₹400</strong></p>
+          <div class="progress"><div id="goal-progress" class="progress-bar"></div></div>
+        </div>
+
+        <div class="spending-chart">
+          <h4>Spending Trend</h4>
+          <div id="chart-bars" class="bars"></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Add Expense Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content card">
+      <h3>Add Expense</h3>
+      <form id="add-expense-form">
+        <label>Title <input required name="title" /></label>
+        <label>Amount <input required name="amount" type="number" step="0.01" /></label>
+        <label>Category <select name="category"><option>Income</option><option>Food</option><option>Transport</option><option>Bills</option><option>Fun</option></select></label>
+        <label>Date <input name="date" type="date" /></label>
+        <div class="actions">
+          <button type="submit" class="btn primary">Save</button>
+          <button type="button" id="close-modal" class="btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function clearAllData(){
+      if(confirm('Delete all transactions and reset your tracker?')){
+        localStorage.removeItem('expense-tracker:data:v1');
+        window.location.reload();
+      }
+    }
+  </script>
+  <script src="assets/js/app.js?v=2"></script>
+</body>
+</html>

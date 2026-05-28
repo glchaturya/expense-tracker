@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expense Tracker — Spending Analysis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-surface text-on-surface font-body-md">
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>Expense Tracker</h1>
+      <p class="muted">Wealth Tracker</p>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-item">Dashboard</a>
+      <a href="goal.html" class="nav-item">Goals</a>
+      <a href="spending.html" class="nav-item active">Spending</a>
+      <a href="settings.html" class="nav-item">Settings</a>
+    </nav>
+    <button id="open-add-3" class="cta">Add Expense</button>
+  </aside>
+
+  <header class="topbar">
+    <h2>Spending Analysis</h2>
+    <div class="profile">
+      <img src="https://via.placeholder.com/40" alt="avatar" class="avatar">
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="card">
+      <h3>Category Distribution</h3>
+      <div id="donut" class="donut"></div>
+    </section>
+
+    <section class="card">
+      <h3>Detailed Breakdown</h3>
+      <div id="breakdown-list"></div>
+    </section>
+  </main>
+
+  <script src="assets/js/app.js?v=2"></script>
+</body>
+</html>

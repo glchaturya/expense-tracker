@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Expense Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        .active-tab-shadow { box-shadow: 0px 4px 4px rgba(99,14,212,0.15); }
+        .tactile-card { box-shadow: 0px 24px 48px -12px rgba(99,14,212,0.08); transition: transform 0.2s ease; }
+        .tactile-button:active { transform: scale(0.98); }
+        input:focus { outline: none; box-shadow: 0 0 0 2px #630ed4; }
+        .toggle-checkbox:checked + .toggle-label { background-color: #006a61; }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot { transform: translateX(100%); }
+</style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="hidden md:flex flex-col h-screen w-72 bg-surface-container p-6 space-y-4 rounded-r-xl shadow-md sticky top-0">
+<div class="mb-10">
+<h1 class="font-display-lg text-display-lg font-extrabold text-primary">Expense Tracker</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Expense Tracker</p>
+</div>
+<nav class="flex-grow space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl" href="goal.html">
+<span class="material-symbols-outlined">ads_click</span>
+<span class="font-label-md">Goal Tracker</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant rounded-xl" href="spending.html">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md">Spending</span>
+</a>
+<!-- Active State: Settings -->
+<a class="flex items-center gap-4 px-4 py-3 bg-primary-container text-on-primary-container rounded-xl shadow-sm" href="settings.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl">Add Expense</button>
+</div>
+</aside>
+
+<main class="flex-1 p-6">
+<header class="flex justify-between items-center mb-6">
+<h2 class="text-headline-md">Account Settings</h2>
+<div class="flex items-center gap-4">
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-full" placeholder="Search settings..." type="text"/>
+<button class="p-2 rounded-full">🔔</button>
+<img src="https://via.placeholder.com/40" alt="avatar" class="w-10 h-10 rounded-full"/>
+</div>
+</header>
+
+<section class="bg-white rounded-xl p-6 shadow-md mb-6">
+<h3 class="mb-4">Profile</h3>
+<div class="grid md:grid-cols-2 gap-4">
+<div>
+<label>Full Name</label>
+<input class="w-full p-3 border rounded-lg" value="Alexandra Vance" />
+</div>
+<div>
+<label>Email</label>
+<input class="w-full p-3 border rounded-lg" value="alexandra.v@vividledger.com" />
+</div>
+</div>
+</section>
+
+<section class="bg-white rounded-xl p-6 shadow-md mb-6">
+<h3 class="mb-4">Preferences</h3>
+<div class="grid md:grid-cols-3 gap-4">
+<div>
+<label>Currency</label>
+<select class="w-full p-3 border rounded-lg"><option>INR (₹)</option><option>USD ($)</option><option>EUR (€)</option></select>
+</div>
+<div>
+<label>Language</label>
+<select class="w-full p-3 border rounded-lg"><option>English (US)</option></select>
+</div>
+<div>
+<label>Appearance</label>
+<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg">
+<span>Dark Mode</span>
+<div class="relative inline-block w-12">
+<input id="darkModeToggle" type="checkbox" class="toggle-checkbox absolute w-6 h-6 rounded-full bg-white border-4 appearance-none" />
+<label for="darkModeToggle" class="toggle-label block h-6 rounded-full bg-surface-variant"></label>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bg-white rounded-xl p-6 shadow-md">
+<h3 class="mb-4">Danger Zone</h3>
+<p class="text-sm text-muted">Delete account and exported data.</p>
+<div class="mt-4 flex gap-3">
+<button class="p-3 rounded-lg border">Export CSV</button>
+<button class="p-3 rounded-lg bg-red-600 text-white">Delete Account</button>
+</div>
+</section>
+
+</main>
+
+<script>
+const toggle = document.getElementById('darkModeToggle');
+if(toggle){ toggle.addEventListener('change', ()=>{ if(toggle.checked) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark'); }); }
+</script>
+</body>
+</html>

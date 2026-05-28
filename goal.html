@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expense Tracker — Goal Booster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-surface text-on-surface font-body-md">
+  <aside class="sidebar">
+    <div class="brand">
+      <h1>Expense Tracker</h1>
+      <p class="muted">Wealth Tracker</p>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-item">Dashboard</a>
+      <a href="goal.html" class="nav-item active">Goals</a>
+      <a href="spending.html" class="nav-item">Spending</a>
+      <a href="settings.html" class="nav-item">Settings</a>
+    </nav>
+    <button id="open-add-2" class="cta">Add Expense</button>
+  </aside>
+
+  <header class="topbar">
+    <h2>Goal Booster</h2>
+    <div class="profile">
+      <img src="https://via.placeholder.com/40" alt="avatar" class="avatar">
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="card p-8 goal-form-card">
+      <h3>Create Your Goal</h3>
+      <p class="muted">Enter your savings goal and track your progress.</p>
+      <form id="goal-form" class="goal-input-form">
+        <label>Goal Name <input id="goal-name-input" type="text" placeholder="e.g., Dream Vacation" required /></label>
+        <label>Target Amount (₹) <input id="goal-target-input" type="number" placeholder="e.g., 50000" min="0" step="100" required /></label>
+        <label>Amount Saved (₹) <input id="goal-saved-input" type="number" placeholder="e.g., 5000" min="0" step="100" /></label>
+        <label>Monthly Deposit (₹) <input id="goal-monthly-input" type="number" placeholder="e.g., 600" min="0" step="50" /></label>
+        <div class="goal-form-actions">
+          <button type="submit" class="btn primary">Save Goal</button>
+          <button type="button" id="clear-goal" class="btn outline">Clear Goal</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card tactile-card p-8">
+      <div class="goal-hero">
+        <div class="icon">✈️</div>
+        <div>
+          <p class="muted">Target</p>
+          <h3 id="goal-title">Dream Vacation</h3>
+          <p>Target: <strong id="goal-target">₹1200</strong> • Saved: <strong id="goal-saved-2">₹400</strong></p>
+          <p style="margin-top: 12px; font-size: 18px; font-weight: 600; color: #333;">Months to reach: <strong id="months-to-reach" style="color: #630ed4; font-size: 22px;">1</strong></p>
+          <div id="goal-celebration" style="margin-top: 14px; font-size: 16px; font-weight: 700; color: #1a7f37; display: none;">🎉 Goal reached! Time to celebrate. 🎉</div>
+        </div>
+        <div class="percent"><span id="goal-percent">33%</span></div>
+      </div>
+    </section>
+
+    <section class="card p-8">
+      <h4>Boost Speed</h4>
+      <p>Choose how fast you want to reach your destination.</p>
+      <div class="boosts">
+        <button id="toggle-standard" class="btn outline">Standard Track<br/><strong>₹400/mo</strong></button>
+        <button id="toggle-fast" class="btn primary">Fast Track<br/><strong>₹600/mo</strong></button>
+      </div>
+    </section>
+
+    <section class="card p-8">
+      <label for="speed-slider">Fine-Tune Monthly Deposit</label>
+      <input id="speed-slider" type="range" min="100" max="1000" step="50" value="600" />
+      <div class="range-values"><span>₹100</span><span id="recommended">Recommended: ₹600</span><span>₹1,000</span></div>
+      <button id="boost-now" class="btn primary">Boost Now</button>
+    </section>
+
+    <section class="card p-8">
+      <h4>Save Remaining Month</h4>
+      <p>Send leftover budget from this month's salary and expenses directly into the goal.</p>
+      <button id="save-monthly-remains" class="btn primary">Save Month Remainder</button>
+    </section>
+  </main>
+
+  <!-- reuse modal -->
+  <div id="modal-2" class="modal hidden">
+    <div class="modal-content card">
+      <h3>Add Expense</h3>
+      <form id="add-expense-form-2">
+        <label>Title <input required name="title" /></label>
+        <label>Amount <input required name="amount" type="number" step="0.01" /></label>
+        <label>Category <select name="category"><option>Income</option><option>Food</option><option>Transport</option><option>Bills</option><option>Fun</option></select></label>
+        <label>Date <input name="date" type="date" /></label>
+        <div class="actions">
+          <button type="submit" class="btn primary">Save</button>
+          <button type="button" id="close-modal-2" class="btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js?v=2"></script>
+</body>
+</html>
