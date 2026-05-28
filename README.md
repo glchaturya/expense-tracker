@@ -24,3 +24,4 @@ Deploy to Netlify:
 Notes:
 - Data is stored in `localStorage` under key `expense-tracker:data:v1`.
 - No backend included; this is a client-only demo intended to mirror the UI you provided.
+
