@@ -359,4 +359,17 @@ window.addEventListener('DOMContentLoaded', ()=>{
       openModal(target);
     });
   });
+
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  if (mobileMenuBtn && mobileNav) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('hidden');
+    });
+    // close when a link is clicked
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.add('hidden')));
+    // click outside to close
+    mobileNav.addEventListener('click', (ev) => { if (ev.target === mobileNav) mobileNav.classList.add('hidden'); });
+  }
 });

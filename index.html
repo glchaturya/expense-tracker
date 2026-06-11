@@ -24,6 +24,7 @@
 
   <header class="topbar">
     <h2>Dashboard</h2>
+    <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Menu">☰</button>
     <div class="profile">
       <div class="profile-section">
         <img id="profile-pic" class="profile-pic" alt="Profile" />
@@ -111,6 +112,16 @@
 
   <!-- Mobile Floating Add Button -->
   <button class="fab-add" data-target="modal" aria-label="Add Expense">+</button>
+
+  <!-- Mobile navigation overlay -->
+  <div id="mobile-nav" class="mobile-nav hidden">
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="goal.html">Goals</a>
+      <a href="spending.html">Spending</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </div>
 
   <script>
     function clearAllData(){
