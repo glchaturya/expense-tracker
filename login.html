@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expense Tracker — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="assets/css/styles.css" rel="stylesheet">
+  <style>
+    .login-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: var(--bg);
+    }
+    .login-card {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(16,24,40,0.04);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+    }
+    .login-card h1 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 28px;
+      text-align: center;
+    }
+    .login-card .subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #111;
+      font-size: 14px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e6e6e9;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Plus Jakarta Sans', system-ui;
+      transition: border-color 0.2s ease;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99,14,212,0.1);
+    }
+    .remember-me {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    .remember-me input {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    .remember-me label {
+      cursor: pointer;
+      margin: 0;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .login-btn:hover {
+      background: #7c3aed;
+    }
+    .login-btn:active {
+      transform: scale(0.98);
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 24px 0;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e6e6e9;
+    }
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .signup-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s ease;
+    }
+    .signup-link a:hover {
+      opacity: 0.8;
+    }
+    .error-message {
+      background: #f8d7da;
+      color: #842029;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+    .error-message.show {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md">
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Expense Tracker</h1>
+      <p class="subtitle">Track your finances</p>
+      
+      <div class="error-message" id="error-message"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter your password" required />
+        </div>
+
+        <div class="remember-me">
+          <input id="remember" type="checkbox" />
+          <label for="remember">Remember me</label>
+        </div>
+
+        <button type="submit" class="login-btn">Sign In</button>
+      </form>
+
+      <div class="divider">or</div>
+
+      <div class="signup-link">
+        Don't have an account? <a href="register.html">Sign up here</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LOGIN_KEY = 'expenseTracker.currentUser';
+    const USERS_KEY = 'expenseTracker.users';
+
+    function getUsers() {
+      const users = localStorage.getItem(USERS_KEY);
+      return users ? JSON.parse(users) : [];
+    }
+
+    function saveUser(email, password) {
+      const users = getUsers();
+      const userExists = users.find(u => u.email === email);
+      if (userExists) return false;
+      users.push({ email, password, createdAt: new Date().toISOString() });
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+      return true;
+    }
+
+    function verifyUser(email, password) {
+      const users = getUsers();
+      return users.find(u => u.email === email && u.password === password);
+    }
+
+    function setCurrentUser(email) {
+      localStorage.setItem(LOGIN_KEY, JSON.stringify({ email, loginTime: new Date().toISOString() }));
+    }
+
+    function showError(message) {
+      const errorDiv = document.getElementById('error-message');
+      errorDiv.textContent = message;
+      errorDiv.classList.add('show');
+      setTimeout(() => errorDiv.classList.remove('show'), 4000);
+    }
+
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('remember').checked;
+
+      // Demo: If no users exist, auto-create demo account
+      if (getUsers().length === 0) {
+        saveUser('demo@example.com', 'demo123');
+      }
+
+      const user = verifyUser(email, password);
+      if (!user) {
+        showError('Invalid email or password');
+        return;
+      }
+
+      setCurrentUser(email);
+      if (remember) {
+        localStorage.setItem('expenseTracker.rememberMe', 'true');
+      }
+
+      window.location.href = 'index.html';
+    });
+
+    // Check if user is already logged in
+    window.addEventListener('DOMContentLoaded', () => {
+      const currentUser = localStorage.getItem(LOGIN_KEY);
+      if (currentUser) {
+        window.location.href = 'index.html';
+      }
+
+      // Auto-fill demo credentials for testing
+      const users = getUsers();
+      if (users.length === 0) {
+        saveUser('demo@example.com', 'demo123');
+        document.getElementById('email').value = 'demo@example.com';
+        document.getElementById('password').value = 'demo123';
+      }
+    });
+  </script>
+</body>
+</html>

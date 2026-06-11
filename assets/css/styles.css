@@ -63,4 +63,6 @@ body{margin:0;background:var(--bg);color:#111}
 .profile-name:hover{opacity:0.7}
 .upload-btn{background:var(--primary);color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-size:14px;transition:background 0.2s ease}
 .upload-btn:hover{background:#7c3aed}
+.logout-btn{background:#ba1a1a;color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-size:14px;transition:background 0.2s ease}
+.logout-btn:hover{background:#a01515}
 @media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.topbar{margin-left:0}}

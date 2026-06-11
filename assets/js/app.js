@@ -2,6 +2,21 @@
 const STORAGE_KEY = 'expense-tracker:data:v1';
 const PROFILE_PIC_KEY = 'expenseTracker.profilePic';
 const PROFILE_NAME_KEY = 'expenseTracker.profileName';
+const LOGIN_KEY = 'expenseTracker.currentUser';
+
+// Check if user is logged in
+function checkAuth() {
+  const currentUser = localStorage.getItem(LOGIN_KEY);
+  if (!currentUser) {
+    window.location.href = 'login.html';
+  }
+}
+
+function logout() {
+  localStorage.removeItem(LOGIN_KEY);
+  localStorage.removeItem('expenseTracker.rememberMe');
+  window.location.href = 'login.html';
+}
 
 function loadData(){
   try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {expenses:[], salary:0, goal:{target:1200, saved:400}} }catch(e){return {expenses:[], salary:0, goal:{target:1200, saved:400}}}
@@ -320,6 +335,7 @@ function initProfilePicture() {
 
 // Init when DOM ready
 window.addEventListener('DOMContentLoaded', ()=>{
+  checkAuth();
   wireModals();
   renderDashboard();
   renderSpending();
@@ -327,4 +343,13 @@ window.addEventListener('DOMContentLoaded', ()=>{
   initGoal();
   renderGoal();
   initProfilePicture();
+  
+  const logoutBtn = document.querySelector('#logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to logout?')) {
+        logout();
+      }
+    });
+  }
 });
