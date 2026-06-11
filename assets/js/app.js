@@ -209,9 +209,45 @@ function renderGoal(){
   if($('#goal-target')) $('#goal-target').textContent = '₹' + data.goal.target;
   if($('#goal-percent')) $('#goal-percent').textContent = Math.round((data.goal.saved/data.goal.target)*100)+'%';
   const remaining = Math.max(0, data.goal.target - data.goal.saved);
-  const monthlyDeposit = data.goal.monthly || document.getElementById('speed-slider')?.value || 600;
+  const monthlyDeposit = data.goal.monthly || Number(document.getElementById('speed-slider')?.value) || 600;
   const months = monthlyDeposit > 0 ? Math.ceil(remaining / monthlyDeposit) : 0;
   if($('#months-to-reach')) $('#months-to-reach').textContent = months + ' months';
+  const expenses = data.expenses ? data.expenses.filter(e => e.amount < 0) : [];
+  const totalExpense = expenses.reduce((sum, e) => sum + Math.abs(e.amount), 0);
+  let avgMonthlySpend = 0;
+  if (expenses.length > 0) {
+    const dates = expenses.map(e => new Date(e.date || new Date()));
+    const firstDate = new Date(Math.min(...dates.map(d => d.getTime())));
+    const days = Math.max(1, Math.ceil((new Date() - firstDate) / (1000 * 60 * 60 * 24)));
+    const monthsSpan = Math.max(1, Math.ceil(days / 30));
+    avgMonthlySpend = Math.round(totalExpense / monthsSpan);
+  }
+  const fasterMonths = Math.max(1, months > 1 ? months - 1 : months);
+  const requiredSavingFaster = fasterMonths > 0 ? Math.ceil(remaining / fasterMonths) : monthlyDeposit;
+  const extraPerMonth = Math.max(0, requiredSavingFaster - monthlyDeposit);
+  const categoryTotals = expenses.reduce((acc, e) => {
+    const category = (e.category || 'Other').toString();
+    acc[category] = (acc[category] || 0) + Math.abs(e.amount);
+    return acc;
+  }, {});
+  const topCategory = Object.entries(categoryTotals).sort((a,b) => b[1] - a[1])[0];
+  let adviceText = '';
+  if (remaining <= 0) {
+    adviceText = 'Congratulations! You have already reached your goal.';
+  } else if (extraPerMonth <= 0) {
+    adviceText = 'You are on track to reach your goal on time. Keep saving at the same rate.';
+  } else {
+    adviceText = `To reach your goal one month sooner, save about ₹${extraPerMonth} more per month ` +
+      `or reduce your monthly spending by a similar amount.`;
+  }
+  if ($('#goal-advice')) $('#goal-advice').textContent = adviceText;
+  if ($('#goal-advice-category')) {
+    if (topCategory && topCategory[1] > 0) {
+      $('#goal-advice-category').textContent = `Your largest expense is currently ${topCategory[0]} (₹${topCategory[1]} total). Try cutting back there first to hit your goal faster.`;
+    } else {
+      $('#goal-advice-category').textContent = avgMonthlySpend > 0 ? `Your average monthly spending is ₹${avgMonthlySpend}. Reducing discretionary expenses may help you save faster.` : 'Add some expenses so we can suggest where to cut back.';
+    }
+  }
   const celebration = $('#goal-celebration');
   if(celebration){
     if(data.goal.saved >= data.goal.target){

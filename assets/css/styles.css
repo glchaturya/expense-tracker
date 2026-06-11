@@ -45,6 +45,10 @@ body{margin:0;background:var(--bg);color:#111}
 .goal-input-form input{padding:10px;margin-top:6px;border:1px solid #e6e6e9;border-radius:12px;font-size:14px}
 .goal-input-form input:focus{border-color:var(--primary);box-shadow:0 0 0 2px rgba(99,14,212,0.1)}
 .goal-input-form .btn{margin-top:8px}
+.goal-advice-section{margin-top:18px;padding:16px;background:#f8f5ff;border-radius:16px;border:1px solid #ece8ff}
+.goal-advice-section h4{margin:0 0 8px;font-size:1rem;color:#4338ca}
+.goal-advice{margin:0;color:#111;line-height:1.6}
+.goal-advice-category{margin-top:8px;color:#4b5563}
 .btn.primary{background:var(--primary);color:#fff;border:none}
 .btn.danger{background:#d9534f;color:#fff;border:none}
 .btn.danger:hover{background:#c9302c}
