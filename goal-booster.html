@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker - Goal Booster</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body data-page="goals">
+  <header class="topbar">
+    <div class="brand">Expense Tracker</div>
+    <nav class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="goal-booster.html" class="active">Goal Booster</a>
+      <a href="spending-analysis.html">Spending Analysis</a>
+    </nav>
+    <div class="profile-section">
+      <img id="profile-pic" class="profile-pic" alt="Profile" />
+      <input id="profile-upload" type="file" accept="image/*" style="display: none;" />
+      <button id="upload-btn" class="upload-btn" title="Upload profile picture">Upload Photo</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel summary-panel">
+      <div class="panel-title">Goal Booster</div>
+      <p>Set financial milestones and track progress toward savings targets.</p>
+      <div class="goal-summary">
+        <article>
+          <span>Active goals</span>
+          <strong id="active-goals-count">0</strong>
+        </article>
+        <article>
+          <span>Total saved</span>
+          <strong id="total-goal-savings">$0.00</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Add a Savings Goal</div>
+      <form id="goal-form" class="form-grid">
+        <label>
+          Goal name
+          <input id="goal-title" type="text" placeholder="Vacation, emergency fund" required />
+        </label>
+
+        <label>
+          Target amount
+          <input id="goal-target" type="number" min="0" step="10" placeholder="1000" required />
+        </label>
+
+        <label>
+          Due date
+          <input id="goal-deadline" type="date" required />
+        </label>
+
+        <button type="submit" class="primary">Create Goal</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Contribute to a Goal</div>
+      <form id="contribution-form" class="form-grid">
+        <label>
+          Select goal
+          <select id="contribution-goal"></select>
+        </label>
+
+        <label>
+          Amount
+          <input id="contribution-amount" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+        </label>
+
+        <button type="submit" class="primary">Save Contribution</button>
+      </form>
+    </section>
+
+    <section class="panel goal-panel">
+      <div class="panel-title">Your Goals</div>
+      <div id="goal-list" class="goal-list"></div>
+    </section>
+  </main>
+</body>
+</html>

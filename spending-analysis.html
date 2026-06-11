@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker - Spending Analysis</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body data-page="analysis">
+  <header class="topbar">
+    <div class="brand">Expense Tracker</div>
+    <nav class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="goal-booster.html">Goal Booster</a>
+      <a href="spending-analysis.html" class="active">Spending Analysis</a>
+    </nav>
+    <div class="profile-section">
+      <img id="profile-pic" class="profile-pic" alt="Profile" />
+      <input id="profile-upload" type="file" accept="image/*" style="display: none;" />
+      <button id="upload-btn" class="upload-btn" title="Upload profile picture">Upload Photo</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel summary-panel">
+      <div class="panel-title">Spending Analysis</div>
+      <p>Understand how your money flows with category and monthly breakdowns.</p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Category Distribution</div>
+      <div id="category-chart" class="chart-grid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Monthly Trend</div>
+      <div id="trend-chart" class="trend-chart"></div>
+    </section>
+
+    <section class="panel analysis-panel">
+      <div class="panel-title">Insight Summary</div>
+      <div id="analysis-insights" class="insight-grid"></div>
+    </section>
+  </main>
+</body>
+</html>
