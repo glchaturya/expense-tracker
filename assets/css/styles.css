@@ -65,4 +65,26 @@ body{margin:0;background:var(--bg);color:#111}
 .upload-btn:hover{background:#7c3aed}
 .logout-btn{background:#ba1a1a;color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-size:14px;transition:background 0.2s ease}
 .logout-btn:hover{background:#a01515}
-@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.topbar{margin-left:0}}
+@media (max-width:900px) {
+	.sidebar { display: none; }
+	.main { margin-left: 0; padding: 16px; }
+	.topbar { margin-left: 0; padding: 12px 16px; align-items: center; }
+	.topbar h2 { font-size: 1rem; margin: 0; }
+	.profile-section { gap: 8px; margin-left: auto; }
+	.profile-pic { width: 40px; height: 40px; }
+	.profile-name { display: none; }
+	.upload-btn, .logout-btn { padding: 6px 10px; font-size: 13px; }
+	.grid { grid-template-columns: 1fr; }
+	.hero { padding: 18px; border-radius: 12px; }
+	.card { padding: 12px; border-radius: 12px; }
+	.salary-form input { width: 100%; }
+	.salary-entry { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
+
+@media (max-width:480px) {
+	.topbar { padding: 10px 12px; }
+	.profile-pic { width: 36px; height: 36px; }
+	.upload-btn, .logout-btn { padding: 6px 8px; font-size: 12px; }
+	.vivid-gradient { padding: 16px; }
+	.card-grid { gap: 12px; }
+}
