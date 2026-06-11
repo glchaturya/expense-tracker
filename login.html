@@ -7,99 +7,151 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="assets/css/styles.css" rel="stylesheet">
   <style>
-    .login-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: var(--bg);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .login-card {
-      background: var(--surface);
-      border-radius: 16px;
-      box-shadow: 0 6px 16px rgba(16,24,40,0.04);
-      padding: 40px;
-      width: 100%;
-      max-width: 400px;
-    }
-    .login-card h1 {
-      margin: 0 0 10px;
-      color: var(--primary);
-      font-size: 28px;
-      text-align: center;
-    }
-    .login-card .subtitle {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 30px;
-      font-size: 14px;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #111;
-      font-size: 14px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #e6e6e9;
-      border-radius: 8px;
-      font-size: 14px;
+
+    body {
+      background: #f4f2ff;
+      height: 100vh;
+      display: grid;
+      place-items: center;
       font-family: 'Plus Jakarta Sans', system-ui;
-      transition: border-color 0.2s ease;
     }
-    .form-group input:focus {
+
+    .phone {
+      width: 360px;
+      height: 720px;
+      background: white;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,.15);
+    }
+
+    .hero {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--primary), #7c3aed);
+      transition: .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: rgba(255,255,255,.12);
+      border-radius: 45%;
+      top: -140px;
+      left: -120px;
+      animation: rotate 18s linear infinite;
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      color: white;
+      padding: 70px 30px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      font-weight: 800;
+    }
+
+    .hero p {
+      margin-top: 12px;
+      opacity: .9;
+      font-size: 16px;
+    }
+
+    .card {
+      position: absolute;
+      bottom: -420px;
+      left: 18px;
+      right: 18px;
+      background: white;
+      border-radius: 32px 32px 0 0;
+      padding: 34px;
+      transition: .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .card h2 {
+      color: var(--primary);
+      margin-bottom: 24px;
+      font-size: 24px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: none;
+      background: #f5f5fb;
+      border-radius: 14px;
+      font-family: 'Plus Jakarta Sans', system-ui;
+      font-size: 16px;
+      transition: background 0.2s ease;
+    }
+
+    .input:focus {
       outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99,14,212,0.1);
+      background: #efefff;
     }
-    .remember-me {
+
+    .remember-section {
       display: flex;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       font-size: 14px;
     }
-    .remember-me input {
+
+    .remember-section input {
       width: 18px;
       height: 18px;
       margin-right: 8px;
       cursor: pointer;
     }
-    .remember-me label {
+
+    .remember-section label {
       cursor: pointer;
       margin: 0;
     }
-    .login-btn {
+
+    .btn {
       width: 100%;
-      padding: 12px;
-      background: var(--primary);
-      color: #fff;
+      padding: 16px;
       border: none;
-      border-radius: 8px;
-      font-weight: 600;
+      border-radius: 18px;
+      background: var(--primary);
+      color: white;
       font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
       transition: background 0.2s ease;
     }
-    .login-btn:hover {
+
+    .btn:hover {
       background: #7c3aed;
     }
-    .login-btn:active {
+
+    .btn:active {
       transform: scale(0.98);
     }
+
     .divider {
       display: flex;
       align-items: center;
-      margin: 24px 0;
+      margin: 20px 0;
       gap: 12px;
       color: var(--muted);
       font-size: 14px;
     }
+
     .divider::before,
     .divider::after {
       content: '';
@@ -107,60 +159,84 @@
       height: 1px;
       background: #e6e6e9;
     }
+
     .signup-link {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 16px;
       font-size: 14px;
       color: var(--muted);
     }
+
     .signup-link a {
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
       transition: opacity 0.2s ease;
     }
+
     .signup-link a:hover {
       opacity: 0.8;
     }
+
     .error-message {
       background: #f8d7da;
       color: #842029;
       padding: 12px;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       font-size: 14px;
       display: none;
     }
+
     .error-message.show {
       display: block;
     }
+
+    .phone.open .hero {
+      height: 250px;
+    }
+
+    .phone.open .card {
+      bottom: 0;
+    }
   </style>
 </head>
-<body class="bg-surface text-on-surface font-body-md">
-  <div class="login-container">
-    <div class="login-card">
-      <h1>Expense Tracker</h1>
-      <p class="subtitle">Track your finances</p>
+<body>
+  <div class="phone" id="phone">
+    <div class="hero">
+      <div class="blob"></div>
+      <div class="hero-content">
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Sign in</h2>
       
       <div class="error-message" id="error-message"></div>
 
       <form id="login-form">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input id="email" type="email" placeholder="you@example.com" required />
-        </div>
+        <input
+          id="email"
+          class="input"
+          type="email"
+          placeholder="Email"
+          required />
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input id="password" type="password" placeholder="Enter your password" required />
-        </div>
+        <input
+          id="password"
+          class="input"
+          type="password"
+          placeholder="Password"
+          required />
 
-        <div class="remember-me">
+        <div class="remember-section">
           <input id="remember" type="checkbox" />
           <label for="remember">Remember me</label>
         </div>
 
-        <button type="submit" class="login-btn">Sign In</button>
+        <button type="submit" class="btn">Continue</button>
       </form>
 
       <div class="divider">or</div>
@@ -205,6 +281,10 @@
       setTimeout(() => errorDiv.classList.remove('show'), 4000);
     }
 
+    function animateCard() {
+      document.getElementById('phone').classList.add('open');
+    }
+
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('email').value;
@@ -244,6 +324,9 @@
         document.getElementById('email').value = 'demo@example.com';
         document.getElementById('password').value = 'demo123';
       }
+
+      // Trigger animation on load
+      setTimeout(animateCard, 300);
     });
   </script>
 </body>
