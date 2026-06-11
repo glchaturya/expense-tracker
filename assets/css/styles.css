@@ -56,4 +56,11 @@ body{margin:0;background:var(--bg);color:#111}
 .break-item{display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #f1f1f3}
 .bars{display:flex;gap:8px;align-items:end;height:110px}
 .bars .bar{width:14%;background:#e9e5ff;border-radius:6px}
+.profile-section{display:flex;align-items:center;gap:10px;margin-left:auto}
+.profile-pic{width:44px;height:44px;border-radius:50%;border:2px solid var(--primary);cursor:pointer;object-fit:cover;transition:transform 0.2s ease}
+.profile-pic:hover{transform:scale(1.08)}
+.profile-name{font-weight:600;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;cursor:pointer;transition:opacity 0.2s ease}
+.profile-name:hover{opacity:0.7}
+.upload-btn{background:var(--primary);color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-size:14px;transition:background 0.2s ease}
+.upload-btn:hover{background:#7c3aed}
 @media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.topbar{margin-left:0}}

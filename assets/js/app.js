@@ -1,5 +1,7 @@
 // App logic: localStorage-backed expense tracker used across pages
 const STORAGE_KEY = 'expense-tracker:data:v1';
+const PROFILE_PIC_KEY = 'expenseTracker.profilePic';
+const PROFILE_NAME_KEY = 'expenseTracker.profileName';
 
 function loadData(){
   try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {expenses:[], salary:0, goal:{target:1200, saved:400}} }catch(e){return {expenses:[], salary:0, goal:{target:1200, saved:400}}}
@@ -246,6 +248,76 @@ function wireModals(){
   }
 }
 
+// Profile picture management
+function initProfilePicture() {
+  const profilePic = document.querySelector('#profile-pic');
+  const uploadBtn = document.querySelector('#upload-btn');
+  const profileUpload = document.querySelector('#profile-upload');
+  const profileName = document.querySelector('#profile-name');
+
+  if (!profilePic || !uploadBtn || !profileUpload) return;
+
+  // Load saved profile picture
+  const savedPicture = localStorage.getItem(PROFILE_PIC_KEY);
+  if (savedPicture) {
+    profilePic.src = savedPicture;
+    profilePic.style.display = 'block';
+  } else {
+    profilePic.style.display = 'none';
+  }
+
+  // Load saved profile name
+  if (profileName) {
+    const savedName = localStorage.getItem(PROFILE_NAME_KEY) || 'Guest';
+    profileName.textContent = savedName;
+  }
+
+  // Upload button click
+  uploadBtn.addEventListener('click', () => {
+    profileUpload.click();
+  });
+
+  // Profile picture click to upload
+  profilePic.addEventListener('click', () => {
+    profileUpload.click();
+  });
+
+  // Click name to edit
+  if (profileName) {
+    profileName.addEventListener('click', () => {
+      const current = profileName.textContent || '';
+      const newName = prompt('Enter your display name', current);
+      if (newName !== null) {
+        const trimmed = newName.trim();
+        profileName.textContent = trimmed || 'Guest';
+        localStorage.setItem(PROFILE_NAME_KEY, profileName.textContent);
+      }
+    });
+  }
+
+  // File input change
+  profileUpload.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imageData = e.target.result;
+      localStorage.setItem(PROFILE_PIC_KEY, imageData);
+      profilePic.src = imageData;
+      profilePic.style.display = 'block';
+      alert('Profile picture updated successfully!');
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 // Init when DOM ready
 window.addEventListener('DOMContentLoaded', ()=>{
   wireModals();
@@ -254,4 +326,5 @@ window.addEventListener('DOMContentLoaded', ()=>{
   initSalary();
   initGoal();
   renderGoal();
+  initProfilePicture();
 });
