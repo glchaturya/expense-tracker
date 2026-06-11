@@ -88,3 +88,27 @@ body{margin:0;background:var(--bg);color:#111}
 	.vivid-gradient { padding: 16px; }
 	.card-grid { gap: 12px; }
 }
+
+/* Floating add button for mobile */
+.fab-add {
+	display: none;
+	position: fixed;
+	right: 16px;
+	bottom: 20px;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	background: var(--primary);
+	color: #fff;
+	border: none;
+	box-shadow: 0 8px 20px rgba(99,14,212,0.2);
+	font-size: 28px;
+	align-items: center;
+	justify-content: center;
+	display: inline-flex;
+	cursor: pointer;
+}
+
+@media (max-width:900px) {
+	.fab-add { display: inline-flex; }
+}

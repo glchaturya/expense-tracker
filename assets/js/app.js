@@ -352,4 +352,11 @@ window.addEventListener('DOMContentLoaded', ()=>{
       }
     });
   }
+  // Mobile floating add buttons
+  document.querySelectorAll('.fab-add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const target = btn.getAttribute('data-target') || 'modal';
+      openModal(target);
+    });
+  });
 });
