@@ -49,9 +49,22 @@ body{margin:0;background:var(--bg);color:#111}
 .goal-advice-section h4{margin:0 0 8px;font-size:1rem;color:#4338ca}
 .goal-advice{margin:0;color:#111;line-height:1.6}
 .goal-advice-category{margin-top:8px;color:#4b5563}
+.goal-celebration{margin-top:14px;font-size:20px;font-weight:700;color:#1a7f37;opacity:0;transform:scale(0.9);transition:all 0.3s ease}
+.goal-celebration.active{opacity:1;transform:scale(1);animation: celebration-pop 0.8s ease forwards}
+.goal-confetti{position:fixed;top:0;left:0;inset:0;pointer-events:none;overflow:hidden;width:100%;height:100%}
+.goal-confetti.active{animation:screen-flash 0.4s ease}
+.goal-confetti .confetti-piece{position:fixed;width:10px;height:10px;background:transparent;opacity:0.9;animation: confetti-fall 2s ease-in forwards}
+.goal-confetti .confetti-piece:nth-child(odd){border-radius:3px}
+.goal-confetti .confetti-piece:nth-child(even){border-radius:50%}
+.goal-confetti .party-popper{position:fixed;font-size:40px;opacity:1;animation:popper-blast 1.2s ease-in-out forwards}
 .btn.primary{background:var(--primary);color:#fff;border:none}
 .btn.danger{background:#d9534f;color:#fff;border:none}
 .btn.danger:hover{background:#c9302c}
+@keyframes celebration-pop{0%{transform:scale(0.9) rotate(-5deg);opacity:0}50%{transform:scale(1.1) rotate(3deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes confetti-fall{0%{transform:translateY(-100px) rotateX(0) rotateZ(0deg);opacity:1}100%{transform:translateY(800px) rotateX(360deg) rotateZ(360deg);opacity:0}}
+@keyframes popper-blast{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+@keyframes screen-flash{0%{background:rgba(255,255,255,0.3);transform:scale(1)}50%{background:rgba(255,255,255,0.1)}100%{background:rgba(255,255,255,0);transform:scale(1)}}
+
 .tiny{font-size:12px}
 .muted{color:var(--muted)}
 .boosts{display:flex;gap:12px;margin-top:12px}
@@ -129,3 +142,4 @@ body{margin:0;background:var(--bg);color:#111}
 .mobile-nav.hidden{display:none}
 
 @media (max-width:900px){.mobile-menu-btn{display:inline-flex}}
+.goal-hero{position:relative;overflow:hidden}

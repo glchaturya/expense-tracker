@@ -249,11 +249,54 @@ function renderGoal(){
     }
   }
   const celebration = $('#goal-celebration');
-  if(celebration){
-    if(data.goal.saved >= data.goal.target){
+  const confettiContainer = document.getElementById('goal-confetti');
+  if (celebration) {
+    if (data.goal.saved >= data.goal.target) {
       celebration.style.display = 'block';
+      celebration.classList.add('active');
+      celebration.textContent = '🎉 Goal Reached! Party Time! 🎉';
+      if (confettiContainer) {
+        confettiContainer.innerHTML = '';
+        confettiContainer.classList.add('active');
+        const colors = ['#f43f5e','#22c55e','#38bdf8','#e879f9','#fbbf24','#ff6b6b','#4ecdc4','#ffe66d'];
+        // Blast lots of confetti pieces
+        for (let i = 0; i < 60; i++) {
+          const piece = document.createElement('span');
+          piece.className = 'confetti-piece';
+          piece.style.background = colors[i % colors.length];
+          piece.style.left = `${Math.random() * 100}%`;
+          piece.style.top = `${Math.random() * 100}%`;
+          piece.style.width = `${Math.random() * 12 + 4}px`;
+          piece.style.height = `${Math.random() * 12 + 4}px`;
+          piece.style.animationDelay = `${Math.random() * 0.5}s`;
+          piece.style.animationDuration = `${Math.random() * 1.2 + 1.2}s`;
+          piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+          piece.style.setProperty('--tx', `${(Math.random() - 0.5) * 400}px`);
+          piece.style.setProperty('--ty', `${Math.random() * 400 + 200}px`);
+          confettiContainer.appendChild(piece);
+        }
+        // Add party poppers
+        const popperEmojis = ['🎊','🎉','🎈','⭐','✨','🌟','💫'];
+        for (let i = 0; i < 12; i++) {
+          const popper = document.createElement('div');
+          popper.className = 'party-popper';
+          popper.textContent = popperEmojis[Math.floor(Math.random() * popperEmojis.length)];
+          popper.style.left = `${Math.random() * 100}%`;
+          popper.style.top = `${Math.random() * 60}%`;
+          popper.style.setProperty('--tx', `${(Math.random() - 0.5) * 300}px`);
+          popper.style.setProperty('--ty', `${Math.random() * 300 + 100}px`);
+          popper.style.animationDelay = `${Math.random() * 0.6}s`;
+          popper.style.animationDuration = `${Math.random() * 0.6 + 0.8}s`;
+          confettiContainer.appendChild(popper);
+        }
+      }
     } else {
       celebration.style.display = 'none';
+      celebration.classList.remove('active');
+      if (confettiContainer) {
+        confettiContainer.innerHTML = '';
+        confettiContainer.classList.remove('active');
+      }
     }
   }
   const slider = $('#speed-slider');
