@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'expenseTracker.v1';
 const PROFILE_PIC_KEY = 'expenseTracker.profilePic';
+const PROFILE_NAME_KEY = 'expenseTracker.profileName';
 
 const storage = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
 const state = storage || {
@@ -18,6 +19,7 @@ function initProfilePicture() {
   const profilePic = document.querySelector('#profile-pic');
   const uploadBtn = document.querySelector('#upload-btn');
   const profileUpload = document.querySelector('#profile-upload');
+  const profileName = document.querySelector('#profile-name');
 
   if (!profilePic || !uploadBtn || !profileUpload) return;
 
@@ -30,6 +32,12 @@ function initProfilePicture() {
     profilePic.style.display = 'none';
   }
 
+  // Load saved profile name
+  if (profileName) {
+    const savedName = localStorage.getItem(PROFILE_NAME_KEY) || 'Guest';
+    profileName.textContent = savedName;
+  }
+
   // Upload button click
   uploadBtn.addEventListener('click', () => {
     profileUpload.click();
@@ -39,6 +47,19 @@ function initProfilePicture() {
   profilePic.addEventListener('click', () => {
     profileUpload.click();
   });
+
+  // Click name to edit
+  if (profileName) {
+    profileName.addEventListener('click', () => {
+      const current = profileName.textContent || '';
+      const newName = prompt('Enter your display name', current);
+      if (newName !== null) {
+        const trimmed = newName.trim();
+        profileName.textContent = trimmed || 'Guest';
+        localStorage.setItem(PROFILE_NAME_KEY, profileName.textContent);
+      }
+    });
+  }
 
   // File input change
   profileUpload.addEventListener('change', (event) => {
